@@ -1,61 +1,35 @@
 # Numerical verifications
 
-Implement numerically some algorithms to confirm intuition on problems of combinatorics and discrete probabilities.
+Implement numerically some algorithms to confirm intuition
+on problems of combinatorics, discrete probabilities, various brainteasers
+that have struck up my curiosity.
 
-1. [Counting positive paths](#positive-paths-count)
+The repository has a flat structure where each subfolder is either 
+it's own exercise or a group of exercises,
+and markdown files each make up for one exercise.
+The exercises split up as follows :
+
+**Numerical implementations :**
+
+1. [Counting positive paths](positive_path_count/README.md)
 2. [Optimising some discrete order execution](#discrete-optimal-execution)
 3. [Random walk crossing threshold probability](#negative-price-probability)
-4. [Dealing cards evenly without observation](#dealing-indistinguishable-cards)
-5. [Counting diagonal paths](#counting-diagonal-paths)
+4. [Counting diagonal paths](#counting-diagonal-paths)
+
+**Formal proofs :**
+
+5. [Dealing cards evenly without observation](#dealing-indistinguishable-cards)
+6. [How to simulate a pair of standard Gaussian variables from a 2d uniform variable](gaussian_from_uniform_samples.md)
+
+**Programming competitions :**
+
 6. [IEEEXtreme 19 Challenge](#ieee19)
 
-*Also includes :*
-- detours on combinatorics and proofs,
-- detours revolving around the Rust environment,
+*Topics include :*
+- combinatorics, probabilities, pseudo-random number generation, optimisation,
+- benchmarking small Rust programmes, using adapted data structures.
 
 ***
-
-## Positive paths count
-Given an integer $n$, count the number of positive paths
-that start and end at $0$
-and moving $\pm 1$ at each step.
-
-**Solution**
-
-<p style="color:green">
-The closed-form expression can be written as Catalan numbers, 
-which also represent the number of balanced parenthesis.
-</p>
-
-$$ C_{2n} = \begin{pmatrix} 2n \\ n \end{pmatrix} - \begin{pmatrix} 2n \\ n + 1\end{pmatrix}  = \frac{1}{n+1} \begin{pmatrix} 2n+1 \\ n \end{pmatrix}$$
-
-But as one does not necessarily remember this formula from the top of it's head, 
-dynamic programming is also implemented.
-
-Computing incrementally all $C(j, k)$ for $0 \leq j \leq k $, being the number of paths 
-starting at $0$ and ending at $2k$ in $2j$ steps.
-Then the solution is given by $C(n, 0)$.
-
-From a direct first-step analysis, the recurrence relation is :
-```math
-C(j+1, k) = 
-\begin{cases}
-2 C(j, k) + C(j, k-1) + C(j, k+1) \ \text{if 0 < k < j} \\
-2 C(j, j) + C(j, j-1) \ \text{if k = j}\\
-C(j, 1) + C(j, 0) \ \text{if k = 0}
-\end{cases}
-```
-
-> Tested the [benching crate](https://doc.rust-lang.org/cargo/commands/cargo-bench.html) to have an idea of feasible $n$ with direct computations and dynamic programming. At the time of writing it requires to use the *nightly* channel :
-```bash
-cargo +nightly run
-```
-
-<p style="color:orange">
-<i>
-This solution quickly runs into numerical overflow with u32.
-</i>
-</p>
 
 ***
 ## Discrete optimal execution
