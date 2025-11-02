@@ -1,6 +1,5 @@
 # IEEEXtreme 19 Programming Competition Solutions
 
-
 <img src="img/xtreme_logo.gif" width="250px" />
 
 Solutions to problems from the 
@@ -9,8 +8,17 @@ These represent completed submissions and post-competition work.
 
 ## Exercises
 
+1. [Ladder](ladder.md)
+2. Shailesh Triplet
+
 ### Ladder (complete)
-`ladder.py`, `ladder_solution.py`, `ladder.md`
+
+| | File name | 
+| -------- | ------- |
+| Original script | `ladder.py` |
+| Optimised algorithm | `ladder_solution.py` |
+| Solution derivation | `ladder.md` |
+| Test input | `ladder.txt` |
 
 Reverse-engineer and optimize a Monte Carlo simulation algorithm. 
 The problem involves computing the probability 
