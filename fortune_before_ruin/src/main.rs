@@ -1,13 +1,14 @@
+use std::cmp::max;
 
-fn simulate_proba_fortune(N:u32) -> f64 {
+fn simulate_proba_fortune(n:u32) -> f64 {
     /*
     Monte Carlo simulation to compute the probability of fortune before ruin
      */
     let mut p: f64 = 0.;
-    let h: f64 = 1. / N;
-    for k in 1..N {
+    let h: f64 = 1. / n as f64;
+    for _ in 1..n {
         let mut s = 3;
-        while s > 0 and s < 5 {
+        while s > 0 && s < 5 {
             // draw bernoulli with probability 2 / 3
             let b: u8 = 0;
             let c = max(s, 5-s);
@@ -26,7 +27,7 @@ fn simulate_proba_fortune(N:u32) -> f64 {
 
 fn main() {
     let N = 10000;
-    let p_exp: f64 = .8;
+    let p_exp: f64 = 62. / 77.;
     let p_sim = simulate_proba_fortune(N);
     println!("Expected probability : {}", p_exp);
     println!("Simulated probability : {}", p_sim);
