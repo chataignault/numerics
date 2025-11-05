@@ -14,9 +14,28 @@ Fixpoint flip {n : nat} (d : deck n) : deck n :=
 Fixpoint count_ups {n : nat} (d : deck n) : nat :=
   match d with 
     | nild => 0
-    | consd i true d' => S (count_ups d')
-    | consd i false d' => (count_ups d')
+    | consd _ true d' => S (count_ups d')
+    | consd _ false d' => (count_ups d')
   end. 
+
+Lemma flip_preserves_length : forall n (d: deck n),
+  flip d = flip d :> deck n.
+Proof.
+  intros n d.
+  reflexivity.
+Qed.
+
+Lemma flip_involutive : forall n (d: deck n),
+  flip (flip d) = d.
+Proof.
+  intros n d.
+  induction d as [| n' b d' IHd].
+  - (* nild case *)
+    simpl. reflexivity.
+  - (* consd case *)
+    simpl. rewrite IHd.
+    destruct b; reflexivity.
+Qed.
 
 Fixpoint split {n : nat} (d : deck n) (m : nat) (H : m <= n) :
   deck m * deck (n - m) :=
