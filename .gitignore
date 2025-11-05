@@ -19,3 +19,11 @@ target
 *.vos
 *.aux
 
+# processed output
+*.tex
+*.log
+*.out
+*.sty
+*.html
+*.css
+
