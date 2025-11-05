@@ -64,11 +64,37 @@ Proof.
   - destruct b; simpl; lia.
 Qed.
 
-Lemma split_preserves_size : forall n m (H : m <= n) (d : deck n),
+Lemma split_preserves_count : forall n m (H : m <= n) (d : deck n),
   let (d1, d2) := split d m H in
-  forall k, k < m -> True.
+  count_ups d = count_ups d1 + count_ups d2.
 Proof.
-Admitted.
+  intros n m H d.
+  generalize dependent m.
+  induction d as [| n' b d' IHd].
+  - (* nild case *)
+    intros m H.
+    destruct m.
+    + simpl. reflexivity.
+    + exfalso. apply (Nat.nle_succ_0 m H).
+  - (* consd case *)
+    intros m H.
+    destruct m.
+    + simpl. reflexivity.
+    + simpl.
+      destruct (split d' m (le_S_n m n' H)) as [d1 d2] eqn:Hsplit.
+      specialize (IHd m (le_S_n m n' H)).
+      rewrite Hsplit in IHd.
+      destruct b; simpl; lia.
+Qed.
+
+Lemma split_sizes : forall n m (H : m <= n) (d : deck n),
+  let (d1, d2) := split d m H in
+  True.
+Proof.
+  intros n m H d.
+  destruct (split d m H) as [d1 d2].
+  trivial.
+Qed.
 
 Theorem equal_ups :
   forall (n : nat) (m : nat) (H: m <= n) (d: deck n),
