@@ -102,17 +102,33 @@ Theorem equal_ups :
   let (d1, d2) := split d m H in
   count_ups (flip d1) = count_ups d2.
 Proof.
-  intros n m d.
+  intros n m H d Hcount.
 
-  induction d.
+  (* First, get the fact about split preserving counts before destructing *)
+  assert (Hpreserve: let (d1, d2) := split d m H in count_ups d = count_ups d1 + count_ups d2).
+  { apply split_preserves_count. }
 
-  simpl.
+  (* Now destruct the split *)
+  destruct (split d m H) as [d1 d2] eqn:Hsplit.
+  simpl in Hpreserve.
 
-  trivial.
+  (* We have: count_ups d = count_ups d1 + count_ups d2 *)
+  (* And: count_ups d = m *)
+  (* So: m = count_ups d1 + count_ups d2 *)
+  rewrite Hcount in Hpreserve.
 
-  simpl.
+  (* Use count_ups_flip: count_ups (flip d1) + count_ups d1 = m *)
+  (* where m is the length of d1, which has type deck m *)
+  pose proof (count_ups_flip m d1) as Hflip.
 
-  rewrite IHs.
+  (* Now we have:
+     Hpreserve: m = count_ups d1 + count_ups d2
+     Hflip: count_ups (flip d1) + count_ups d1 = m
+     Goal: count_ups (flip d1) = count_ups d2
+  *)
 
-  trivial.
+  (* From Hflip: count_ups (flip d1) = m - count_ups d1 *)
+  (* From Hpreserve: count_ups d2 = m - count_ups d1 *)
+  (* Therefore: count_ups (flip d1) = count_ups d2 *)
+  lia.
 Qed.
