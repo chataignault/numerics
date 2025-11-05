@@ -15,6 +15,7 @@ The exercises split up as follows :
 2. [Optimising some discrete order execution](discrete_optimal_execution/README.md)
 3. [Random walk crossing threshold probability](negative_price_probability/README.md)
 4. [Counting diagonal paths](counting_diagonal_paths/README.md)
+5. [Fortune before ruin](fortune_before_ruin/README.md)
 
 **Formal proofs :**
 
@@ -24,8 +25,7 @@ The exercises split up as follows :
 4. [Card ordering probability](card_ordering_probability.md)
 5. [Correlation asset pricing](correlation_asset_pricing.md)
 6. [Expected number of pairs](expected_number_of_pairs.md)
-7. [Fortune before ruin](fortune_before_ruin.md)
-8. [Probability of intersecting segments](proba_intersecting_segment.md)
+7. [Probability of intersecting segments](proba_intersecting_segment.md)
 
 **Programming competitions :**
 
