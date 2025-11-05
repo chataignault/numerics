@@ -1,6 +1,5 @@
 Require Import Coq.Arith.PeanoNat.
 Require Import Lia.
-(* Require Import Stdlib.Arith.PeanoNat. *)
 
 Inductive deck : nat -> Set :=
   | nild : deck 0
@@ -58,5 +57,17 @@ Theorem equal_ups :
   let (d1, d2) := split d m H in
   count_ups (flip d1) = count_ups d2.
 Proof.
+  intros n m d.
 
+  induction d.
+
+  simpl.
+
+  trivial.
+
+  simpl.
+
+  rewrite IHs.
+
+  trivial.
 Qed.
