@@ -1,4 +1,5 @@
-use std::cmp::max;
+use std::cmp::min;
+use rand::distr::{Distribution,Bernoulli};
 
 fn simulate_proba_fortune(n:u32) -> f64 {
     /*
@@ -6,13 +7,14 @@ fn simulate_proba_fortune(n:u32) -> f64 {
      */
     let mut p: f64 = 0.;
     let h: f64 = 1. / n as f64;
+    let d = Bernoulli::new(2. / 3.).unwrap();
     for _ in 1..n {
         let mut s = 3;
         while s > 0 && s < 5 {
             // draw bernoulli with probability 2 / 3
-            let b: u8 = 0;
-            let c = max(s, 5-s);
-            if b == 1 {
+            let b: bool = d.sample(&mut rand::rng());
+            let c = min(s, 5-s);
+            if b {
                 s += c;
             } else {
                 s -= c;
@@ -26,9 +28,9 @@ fn simulate_proba_fortune(n:u32) -> f64 {
 }
 
 fn main() {
-    let N = 10000;
+    let n = 1000000;
     let p_exp: f64 = 62. / 77.;
-    let p_sim = simulate_proba_fortune(N);
+    let p_sim = simulate_proba_fortune(n);
     println!("Expected probability : {}", p_exp);
     println!("Simulated probability : {}", p_sim);
 }
