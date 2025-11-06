@@ -19,7 +19,7 @@ The exercises split up as follows :
 
 **Formal proofs :**
 
-1. [Dealing cards evenly without observation](dealing_indistinguishable_cards/README.md)
+1. [Dealing cards evenly without observation](dealing_cards/README.md)
 2. [How to simulate a pair of standard Gaussian variables from a 2d uniform variable](gaussian_from_uniform_samples.md)
 3. [Card game optimal strategy](card_game_optimal_strategy.md)
 4. [Card ordering probability](card_ordering_probability.md)
