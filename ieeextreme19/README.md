@@ -6,12 +6,12 @@ Solutions to problems from the
 IEEEXtreme 19.0 [programming competition](https://csacademy.com/ieeextreme19/tasks/). 
 These represent completed submissions and post-competition work.
 
-## Exercises
+## Written solutions
 
 1. [Ladder](ladder.md)
-2. Shailesh Triplet
+2. [Shailesh Triplet](shailesh.md)
 
-### Ladder (complete)
+### Ladder
 
 | | File name | 
 | -------- | ------- |
@@ -28,11 +28,13 @@ both summing to n, are identical.
 
 The exercise ranked second of the competition in terms of total points worth.
 
-### Shailesh Triplet (complete)
+### Shailesh Triplet
 `shailesh_triplet.py`
 
-Find triplets (a, b, c) where a = b + c and k = a XOR b XOR c. 
-Solution identifies valid triplets based on divisibility and power-of-two properties.
+Find triplets (a, b, c) where $2N = a + b + c$ and $N = a \text{XOR} b \text{XOR} c, 
+such that $a$, $b$ and $c$ are distinct elements. 
+Solution identifies valid triplets based on divisibility 
+and power-of-two properties.
 
 ### Circular Permutation
 `circular_permutation.py`
