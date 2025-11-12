@@ -5,7 +5,7 @@
 
 Indeed, $2N = a+b+c$ is always even,
 so there must be an even number of odd elements in $a, b, c$.
-However,  $a \text{XOR} b \text{XOR} c$ in this case must be even,
+However,  $a \text{otimes} b \text{otimes} c$ in this case must be even,
 so it can't sum up to $N$.
 
 > [!WARNING]
@@ -18,6 +18,7 @@ the binary decomposition of a integer $x$.
 Write $n = 2^p$.
 
 **It is necessary that $c(a) = p$**
+
 If it was greater, $a + b + c > a \geq 2N$.
 If it was smaller, $a + b + c < 3a < 4a = 2N$.
 In either case the total sum condition cannot be satisfied.
@@ -46,14 +47,19 @@ it is straightforward that the sum
 $(a-2^p) + b + c \leq 3\times 2^{p-2} < 2^p$
 
 > [!NOTE]
-> General case :
+> In the general case, where $N$ is even and not a power of $2$.
 
 ```math
 \begin{cases}
 a = N\\
 b = \lfloor \frac{N}{2} \rfloor + 2^{p-1}\\
-c = \lfloor \frac{N}{2} \rfloor - 2^{p-1}\\
+c = \lfloor \frac{N}{2} \rfloor - 2^{p-1}
 \end{cases}
 ```
-is a valid solution for $N \geq 4$.
+where $p$ is the greatest power of $2$ that divides $N$,
+is a valid decomposition.
+
+While the summability condition is clear, 
+the bit-wise operation is verified as follow :
+
 
