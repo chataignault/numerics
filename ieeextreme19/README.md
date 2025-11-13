@@ -26,7 +26,8 @@ that two random sequences of 1s and 2s,
 both summing to n, are identical. 
 **Full mathematical derivation and solution provided in `ladder.md`.**
 
-The exercise ranked second of the competition in terms of total points worth.
+The exercise ranked second of the competition 
+in terms of total points worth.
 
 ### Shailesh Triplet
 
@@ -63,7 +64,19 @@ Find the path in a weighted graph from node 1 to node N that minimizes maximum e
 ### Twin Occurrence
 `twin_occurence.py`
 
-Binary search to find the first and last occurrence indices of query values 
-in a sorted array. 
-Returns 1-indexed positions or -1 if not found.
+Given a sorted list and an integer $k$,
+the algorithm should search for the $k$ following integers 
+in the list, 
+and return indexes of the first and last occurences of each elements
+if they are present.
+
+The solution implements a binary search 
+to find one occurence of the each element.
+Then, the first and last occurrence indices are obtained by
+incrementally shifting indexes from the first-found occurence. 
+
+> [!NOTE]
+> The first element of the list is indexed $1$.
+
+Return `-1` of position is not found.
 
