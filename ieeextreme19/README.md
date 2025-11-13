@@ -29,7 +29,11 @@ both summing to n, are identical.
 The exercise ranked second of the competition in terms of total points worth.
 
 ### Shailesh Triplet
-`shailesh_triplet.py`
+
+| | File name | 
+| -------- | ------- |
+| Solution script | `shailesh_triplet.py` |
+| Solution derivation | `shailesh.md` |
 
 Find triplets (a, b, c) where $2N = a + b + c$ and $N = a \text{XOR} b \text{XOR} c, 
 such that $a$, $b$ and $c$ are distinct elements. 
