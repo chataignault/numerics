@@ -9,7 +9,9 @@ Find triplet of distinct integers $(a, b, c)$ such that :
 N = a \otimes b \otimes c
 \end{cases}
 ```
-where $\otimes$ is the bit-wise \textt{XOR} operation.
+where $\otimes$ is the bit-wise `XOR` operation.
+
+***
 
 > [!WARNING]
 > There is no solution if $N$ is odd.
