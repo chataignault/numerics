@@ -8,13 +8,12 @@ l = [int(i) for i in input().strip().split()]
 
 
 mk = 0.
-N = 0
+N = 2**n - 1
 for j in range(n):
     for c in combinations(range(1,n), j):
         sub_l = [l[i] for i in c]
         if len(sub_l):
             mk += reduce(operator.xor, sub_l) ** k
-        N += 1
 
 s = str(mk / N)
 

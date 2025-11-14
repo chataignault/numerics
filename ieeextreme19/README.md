@@ -80,3 +80,8 @@ incrementally shifting indexes from the first-found occurence.
 
 Return `-1` of position is not found.
 
+Test run :
+```bash
+cat twin_occurence.txt | python twin_occurence.py
+```
+
