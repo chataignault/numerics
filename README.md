@@ -30,6 +30,7 @@ The exercises split up as follows :
 **Programming competitions :**
 
 1. [IEEEXtreme 19 Challenge](ieeextreme19/README.md)
+2. [CodeForces](codeforces/README.md)
 
 *Topics include :*
 - combinatorics, probabilities, pseudo-random number generation, optimisation,
