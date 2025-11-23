@@ -4,28 +4,21 @@ fn main() {
     std::io::stdin().read_line(&mut input).unwrap();
     let mut nums = input.split_whitespace();
     let n: i32 = nums.next().unwrap().parse().unwrap();
-    
+
     for _ in 0..n {
-        
         // parse list length
         let mut input = String::new();
         std::io::stdin().read_line(&mut input).unwrap();
         let mut nums = input.split_whitespace();
         let k: i32 = nums.next().unwrap().parse().unwrap();
-        
+
         // parse both lists
         let mut l = String::new();
         std::io::stdin().read_line(&mut l).unwrap();
-        let ajisai: Vec<i32> = l
-            .split_whitespace()
-            .map(|x| x.parse().unwrap())
-            .collect();
+        let ajisai: Vec<i32> = l.split_whitespace().map(|x| x.parse().unwrap()).collect();
         let mut l = String::new();
         std::io::stdin().read_line(&mut l).unwrap();
-        let masai: Vec<i32> = l
-            .split_whitespace()
-            .map(|x| x.parse().unwrap())
-            .collect();
+        let masai: Vec<i32> = l.split_whitespace().map(|x| x.parse().unwrap()).collect();
 
         // Find the highest bit position across both arrays
         let max_ajisai = ajisai.iter().copied().max().unwrap_or(0);
@@ -36,15 +29,19 @@ fn main() {
         } else {
             0
         };
-        
+
         // Check whether ajisai or masai tie on the highest bit
         // Count parity of occurrences where bit m is set
         // loop over m .. 0 until m_c_ajisai and m_c_mai are different.
         // each step : m -= 1
         let mut tie = false;
         loop {
-            let m_c_ajisai = ajisai.iter().fold(0, |acc, &x| if (x & (1 << m)) != 0 { acc ^ 1 } else { acc });
-            let m_c_mai = masai.iter().fold(0, |acc, &x| if (x & (1 << m)) != 0 { acc ^ 1 } else { acc });
+            let m_c_ajisai = ajisai
+                .iter()
+                .fold(0, |acc, &x| if (x & (1 << m)) != 0 { acc ^ 1 } else { acc });
+            let m_c_mai = masai
+                .iter()
+                .fold(0, |acc, &x| if (x & (1 << m)) != 0 { acc ^ 1 } else { acc });
 
             if m_c_ajisai != m_c_mai {
                 break;
@@ -62,12 +59,13 @@ fn main() {
             continue;
         }
 
-
-        let mut i: i32 = k-1;
+        let mut i: i32 = k - 1;
         while i >= 0 {
             // compare only the highest bit "m"
-            if (masai.get(i as usize).unwrap() & (1 << m)) != (ajisai.get(i as usize).unwrap() & (1 << m)) {
-                if i % 2 == 0 { 
+            if (masai.get(i as usize).unwrap() & (1 << m))
+                != (ajisai.get(i as usize).unwrap() & (1 << m))
+            {
+                if i % 2 == 0 {
                     println!("Ajisai");
                 } else {
                     println!("Mai");
@@ -81,4 +79,3 @@ fn main() {
         }
     }
 }
-

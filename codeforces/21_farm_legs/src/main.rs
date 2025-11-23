@@ -6,7 +6,7 @@ fn main() {
     for _ in 0..N {
         let mut l = String::new();
         std::io::stdin().read_line(&mut l).unwrap();
-        let k:i32 = l.split_whitespace().next().unwrap().parse().unwrap();
+        let k: i32 = l.split_whitespace().next().unwrap().parse().unwrap();
         if k % 2 == 1 {
             println!("0");
         } else {
@@ -14,4 +14,3 @@ fn main() {
         }
     }
 }
-

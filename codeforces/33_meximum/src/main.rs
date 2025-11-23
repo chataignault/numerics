@@ -1,18 +1,26 @@
+// List construction with sublist minimum and "exclusive minimum" conditions
+
 fn main() {
+    // parse the number of test cases
     let mut input = String::new();
     std::io::stdin().read_line(&mut input).unwrap();
     let n: i32 = input.split_whitespace().next().unwrap().parse().unwrap();
-    
+
+    // iterate over test cases
     for _ in 0..n {
+        // parse each test case arguments
         let mut args = String::new();
         std::io::stdin().read_line(&mut args).unwrap();
         let mut nums = args.split_whitespace();
+        // length of the final list
         let m: i32 = nums.next().unwrap().parse().unwrap();
+        // integers that corresponds to the minimum for all conditions
         let k: i32 = nums.next().unwrap().parse().unwrap();
+        // number of sub-list conditions
         let q: i32 = nums.next().unwrap().parse().unwrap();
-        
-        let mut triplets = Vec::new();
 
+        // parse the sub-list conditions
+        let mut triplets = Vec::new();
         for _ in 0..q {
             let mut list = String::new();
             std::io::stdin().read_line(&mut list).unwrap();
@@ -20,15 +28,15 @@ fn main() {
                 .split_whitespace()
                 .map(|x| x.parse().unwrap())
                 .collect();
-
             let triplet = (nums[0], nums[1], nums[2]);
             triplets.push(triplet);
         }
 
-        // gather the mex ranges
+        // gather the mex ranges (excluded minimum)
         let mut mexr = vec![];
         for t in &triplets {
             if t.0 == 2 {
+                // convert to zero-indices
                 mexr.push((t.1 - 1, t.2 - 1));
             }
         }
@@ -36,11 +44,12 @@ fn main() {
         let mut minr = vec![];
         for t in &triplets {
             if t.0 == 1 {
+                // convert to zero-indices
                 minr.push((t.1 - 1, t.2 - 1));
             }
         }
 
-        // construct the meximum list with constraints
+        // initialise outputs
         let mut arr = vec![k + 1; m as usize];
 
         // First pass: process all MEX constraints
@@ -48,7 +57,7 @@ fn main() {
             if let (2, l, r) = t {
                 // Check which values from 0..k-1 are already present in the range
                 let mut present = vec![false; k as usize];
-                for idx in *l-1..*r {
+                for idx in *l - 1..*r {
                     let val = arr[idx as usize];
                     if val >= 0 && val < k {
                         present[val as usize] = true;
@@ -63,14 +72,17 @@ fn main() {
                 let mut no_overlap: Vec<i32> = Vec::new();
                 let mut minr_overlap: Vec<i32> = Vec::new();
 
-                for idx in *l-1..*r {
+                for idx in *l - 1..*r {
                     // Skip positions that already have a value from 0..k-1
                     if arr[idx as usize] >= 0 && arr[idx as usize] < k {
                         continue;
                     }
 
-                    let overlaps_minr = minr.iter().any(|(start, end)| *start <= idx && idx <= *end);
-                    let overlaps_mexr = mexr.iter().any(|(start, end)| *start <= idx && idx <= *end && (*l-1 != *start || *r-1 != *end));
+                    let overlaps_minr =
+                        minr.iter().any(|(start, end)| *start <= idx && idx <= *end);
+                    let overlaps_mexr = mexr.iter().any(|(start, end)| {
+                        *start <= idx && idx <= *end && (*l - 1 != *start || *r - 1 != *end)
+                    });
 
                     if overlaps_minr {
                         minr_overlap.push(idx);
@@ -104,11 +116,11 @@ fn main() {
         for t in &triplets {
             if let (1, l, r) = t {
                 // For MIN constraint: ensure at least one position in [l, r] is exactly k
-                let has_k = (*l-1..*r).any(|idx| arr[idx as usize] == k);
+                let has_k = (*l - 1..*r).any(|idx| arr[idx as usize] == k);
 
                 if !has_k {
                     // Find a position that's >= k+1 and set it to k
-                    for idx in *l-1..*r {
+                    for idx in *l - 1..*r {
                         if arr[idx as usize] >= k + 1 {
                             arr[idx as usize] = k;
                             break;
@@ -117,7 +129,13 @@ fn main() {
                 }
             }
         }
-        println!("{}", arr.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(" "));
+        // format output to space-seperated list of integers
+        println!(
+            "{}",
+            arr.iter()
+                .map(|x| x.to_string())
+                .collect::<Vec<_>>()
+                .join(" ")
+        );
     }
 }
-
