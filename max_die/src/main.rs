@@ -1,11 +1,13 @@
 use rand_distr::{Distribution, Uniform};
 
 fn main() {
-    let n: i32 = 10000;
+    let n: i32 = 100000;
     let p: i32 = 30;
     let q: i32 = 20;
 
-    // assert that p <= q
+    let stdmax: f64 = 75.;
+
+    // assert that p < q, else exit the program : value error
 
     println!("Inputs :");
     println!("- n MC samples : {}", n);
@@ -29,40 +31,56 @@ fn main() {
             v += y * y;
         }
     }
-    let exp_return: f64 = (s as f64) / (n as f64);
-    let exp_var: f64 = (v as f64) / (n as f64) - exp_return * exp_return;
-    println!("Expected return : {}", 8.5);
-    println!("Simulated return : {}", exp_return);
+    let exp_p_simulated: f64 = (s as f64) / (n as f64);
+    let exp_p_squared: f64 = (v as f64) / (n as f64);
+    let exp_var: f64 = exp_p_squared - exp_p_simulated * exp_p_simulated;
+
+    let exp_p_analytical: f64 = ((p * (p + 1) - q * (q + 1)) as f64) / (2. * p as f64);
+
+    println!("===NUMERICAL VERIFICATION===");
+    println!("Expected return : {}", exp_p_analytical);
+    println!("Empirical mean return : {}", exp_p_simulated);
     println!();
     println!("Simulated variance : {}", exp_var);
     println!("Simulated standard deviation : {}", exp_var.sqrt());
-
-    let mut s0: f64 = 0.;
-    // compute s0
-    let mut s1: f64 = 0.;
-    let mut s2: f64 = 0.;
-    for k in 1..q {
-        s1 += 1. / k as f64;
-        s2 += (k * (k + 1) * (2 * k + 1)) as f64 / (q - k) as f64;
-    }
-    s0 = 2583. / 20. * s1 - 3. / 400. * s2;
-    // end compute s0
-    let s_final: f64 = 2. * s0 / 3. + 1317. / 12. / 3.;
-    println!("Computed variance : {}", s_final);
     println!();
 
-    let stdmax: f64 = 75.;
-    println!("Max std-deviation expected : {}", stdmax);
+    // Compute E[P²] analytically
+    // E[P²] = (1/pq) * [2·Σ_{x=1}^q x²(x-1) + q·Σ_{x=q+1}^p x²]
+    let mut sum_x_cubed_minus_x_squared: f64 = 0.;
+    for x in 1..=q {
+        sum_x_cubed_minus_x_squared += (x * x * (x - 1)) as f64;
+    }
+
+    let mut sum_x_squared_above_q: f64 = 0.;
+    for x in (q + 1)..=p {
+        sum_x_squared_above_q += (x * x) as f64;
+    }
+
+    let exp_p_squared_analytical: f64 =
+        (2. * sum_x_cubed_minus_x_squared + q as f64 * sum_x_squared_above_q) / (p * q) as f64;
+
+    let variance_analytical: f64 = exp_p_squared_analytical - exp_p_analytical * exp_p_analytical;
+
+    println!("Analytical E[P] : {}", exp_p_analytical);
+    println!("Analytical Var(P) : {}", variance_analytical);
+    println!("Analytical std(P) : {}", variance_analytical.sqrt());
+    println!();
+
+    println!("===RISK LIMIT CONSIDERATIONS===");
+    println!("Max std-deviation allowed : {}", stdmax);
+
     // compute portfolio weight
-    let w: i64 = (stdmax * stdmax / s_final).floor() as i64;
+    let w: i64 = (stdmax * stdmax / variance_analytical).floor() as i64;
+
     println!("Number of games to play : {}", w);
-    println!("Expected return : {}", (17 * w) as f64 / 2.);
+    println!("Expected return : {}", w as f64 * exp_p_analytical);
     println!(
         "Expected ptf std-deviation : {}",
-        (s_final * w as f64).sqrt()
+        (variance_analytical * w as f64).sqrt()
     );
     println!(
         "Sharpe ratio : {}",
-        (17 as f64 * (w as f64).sqrt()) / (2. * s_final.sqrt())
+        (w as f64).sqrt() * exp_p_analytical / variance_analytical.sqrt()
     );
 }
