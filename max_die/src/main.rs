@@ -1,13 +1,40 @@
+use clap::Parser;
 use rand_distr::{Distribution, Uniform};
 
+#[derive(Parser, Debug)]
+#[command(name = "max_die")]
+#[command(about = "Monte Carlo simulation for max die game", long_about = None)]
+struct Args {
+    /// Number of Monte Carlo samples
+    #[arg(short, long, default_value_t = 100000)]
+    n: i32,
+
+    /// Upper bound for first uniform distribution (1 to p)
+    #[arg(short, long, default_value_t = 30)]
+    p: i32,
+
+    /// Upper bound for second uniform distribution (1 to q)
+    #[arg(short, long, default_value_t = 20)]
+    q: i32,
+
+    /// Maximum standard deviation allowed
+    #[arg(short, long, default_value_t = 75.0)]
+    stdmax: f64,
+}
+
 fn main() {
-    let n: i32 = 100000;
-    let p: i32 = 30;
-    let q: i32 = 20;
+    let args = Args::parse();
 
-    let stdmax: f64 = 75.;
+    let n = args.n;
+    let p = args.p;
+    let q = args.q;
+    let stdmax = args.stdmax;
 
-    // assert that p < q, else exit the program : value error
+    // Validate that p > q
+    if p <= q {
+        eprintln!("Error: p must be greater than q (p={}, q={})", p, q);
+        std::process::exit(1);
+    }
 
     println!("Inputs :");
     println!("- n MC samples : {}", n);
@@ -46,20 +73,12 @@ fn main() {
     println!();
 
     // Compute E[P²] analytically
-    // E[P²] = (1/pq) * [2·Σ_{x=1}^q x²(x-1) + q·Σ_{x=q+1}^p x²]
-    let mut sum_x_cubed_minus_x_squared: f64 = 0.;
-    for x in 1..=q {
-        sum_x_cubed_minus_x_squared += (x * x * (x - 1)) as f64;
-    }
+    let exp_p_squared_analytical = (3 * q * (q + 1) * (q + 1) - 2 * (q + 1) * (2 * q + 1)
+        + p * (p + 1) * (2 * p + 1)
+        - q * (q + 1) * (2 * q + 1)) as f64
+        / (6 * p) as f64;
 
-    let mut sum_x_squared_above_q: f64 = 0.;
-    for x in (q + 1)..=p {
-        sum_x_squared_above_q += (x * x) as f64;
-    }
-
-    let exp_p_squared_analytical: f64 =
-        (2. * sum_x_cubed_minus_x_squared + q as f64 * sum_x_squared_above_q) / (p * q) as f64;
-
+    // Deduce analytical variance
     let variance_analytical: f64 = exp_p_squared_analytical - exp_p_analytical * exp_p_analytical;
 
     println!("Analytical E[P] : {}", exp_p_analytical);
