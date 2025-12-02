@@ -2,6 +2,7 @@ use clap::Parser;
 use rand_distr::{Distribution, Uniform};
 
 #[derive(Parser, Debug)]
+#[clap(version)]
 #[command(name = "max_die")]
 #[command(about = "Monte Carlo simulation for max die game", long_about = None)]
 struct Args {
@@ -22,19 +23,30 @@ struct Args {
     stdmax: f64,
 }
 
+fn validate_args(p: i32, q: i32) {
+    // Validate that p > q
+    if p <= q {
+        eprintln!("Error: p must be greater than q (p={}, q={})", p, q);
+        std::process::exit(1);
+    }
+}
+
+fn compute_optimal_turns(game_variance: f64, std_limit: f64) -> i64 {
+    // compute portfolio weight
+    let w: i64 = (std_limit * std_limit / game_variance).floor() as i64;
+    w
+}
+
 fn main() {
     let args = Args::parse();
+    dbg!(&args);
 
     let n = args.n;
     let p = args.p;
     let q = args.q;
     let stdmax = args.stdmax;
 
-    // Validate that p > q
-    if p <= q {
-        eprintln!("Error: p must be greater than q (p={}, q={})", p, q);
-        std::process::exit(1);
-    }
+    validate_args(p, q);
 
     println!("Inputs :");
     println!("- n MC samples : {}", n);
@@ -89,8 +101,7 @@ fn main() {
     println!("===RISK LIMIT CONSIDERATIONS===");
     println!("Max std-deviation allowed : {}", stdmax);
 
-    // compute portfolio weight
-    let w: i64 = (stdmax * stdmax / variance_analytical).floor() as i64;
+    let w = compute_optimal_turns(variance_analytical, stdmax);
 
     println!("Number of games to play : {}", w);
     println!("Expected return : {}", w as f64 * exp_p_analytical);
