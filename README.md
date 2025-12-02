@@ -16,6 +16,7 @@ The exercises split up as follows :
 3. [Random walk crossing threshold probability](negative_price_probability/README.md)
 4. [Counting diagonal paths](counting_diagonal_paths/README.md)
 5. [Fortune before ruin](fortune_before_ruin/README.md)
+6. [Max die game](max_die/README.md)
 
 **Formal proofs :**
 
