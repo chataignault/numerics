@@ -29,3 +29,20 @@ Therefore when taking expectations :
 \mathbb{E}\left[P\right] = -\mathbb{E}\left[P\right] = 0
 ```
 
+So for $p>q$, when conditionning on $X\leq q$ the expectation is zero,
+and since the $P$ simplifies to $X$ when $X > q$, the rest of the expectation simply is :
+
+```math
+\mathbb{E}\left[P | X > q\right] = \frac{p(p-1) - q(q-1)}{2(p-q)}
+```
+
+Since :
+```math 
+p(X > q) = \frac{p-q}{p}
+```
+
+The expectation eventually is :
+
+```math
+\mathbb{E}\left[P \right] = \frac{p(p-1) - q(q-1)}{2p}
+```
