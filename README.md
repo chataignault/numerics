@@ -12,7 +12,7 @@ The exercises split up as follows :
 **Numerical implementations :**
 
 1. [Counting positive paths](positive_path_count/README.md)
-2. [Optimising some discrete order execution](discrete_optimal_execution/README.md)
+2. [Optimising some discrete order execution](discrete_execution_optimisation/README.md)
 3. [Random walk crossing threshold probability](negative_price_probability/README.md)
 4. [Counting diagonal paths](counting_diagonal_paths/README.md)
 5. [Fortune before ruin](fortune_before_ruin/README.md)
@@ -20,7 +20,7 @@ The exercises split up as follows :
 
 **Formal proofs :**
 
-1. [Dealing cards evenly without observation](interview_questions/dealing_cards/README.md)
+1. [Dealing cards evenly without observation](dealing_cards/README.md)
 2. [How to simulate a pair of standard Gaussian variables from a 2d uniform variable](interview_questions/gaussian_from_uniform_samples.md)
 3. [Card game optimal strategy](interview_questions/card_game_optimal_strategy.md)
 4. [Card ordering probability](interview_questions/card_ordering_probability.md)
