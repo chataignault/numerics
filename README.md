@@ -20,13 +20,13 @@ The exercises split up as follows :
 
 **Formal proofs :**
 
-1. [Dealing cards evenly without observation](dealing_cards/README.md)
-2. [How to simulate a pair of standard Gaussian variables from a 2d uniform variable](gaussian_from_uniform_samples.md)
-3. [Card game optimal strategy](card_game_optimal_strategy.md)
-4. [Card ordering probability](card_ordering_probability.md)
-5. [Correlation asset pricing](correlation_asset_pricing.md)
-6. [Expected number of pairs](expected_number_of_pairs.md)
-7. [Probability of intersecting segments](proba_intersecting_segment.md)
+1. [Dealing cards evenly without observation](interview_questions/dealing_cards/README.md)
+2. [How to simulate a pair of standard Gaussian variables from a 2d uniform variable](interview_questions/gaussian_from_uniform_samples.md)
+3. [Card game optimal strategy](interview_questions/card_game_optimal_strategy.md)
+4. [Card ordering probability](interview_questions/card_ordering_probability.md)
+5. [Correlation asset pricing](interview_questions/correlation_asset_pricing.md)
+6. [Expected number of pairs](interview_questions/expected_number_of_pairs.md)
+7. [Probability of intersecting segments](interview_questions/proba_intersecting_segment.md)
 
 **Programming competitions :**
 
@@ -35,5 +35,5 @@ The exercises split up as follows :
 
 *Topics include :*
 - combinatorics, probabilities, pseudo-random number generation, optimisation,
-- benchmarking small Rust programmes, using adapted data structures.
-
+- benchmarking small Rust programmes, using adapted data structures,
+- getting familiar with functional programming with Haskell.
