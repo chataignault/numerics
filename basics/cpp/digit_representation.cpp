@@ -28,7 +28,7 @@ void print_number( Number n )
 void test31() {
     Digit d1{ 1, nullptr };
     Digit d2{ 2, &d1 };
-    Digit d3{3, &d2};
+    Digit d3{ 3, &d2 };
     Number number{&d3};
 
     print_number(number);
@@ -177,14 +177,6 @@ void test_52( unsigned int i ) {
 
 }
 
-
-/*
-int main() {
-    unsigned long big{100};
-
-}
-*/
-
 boost::multiprecision::mpz_int factorial_gmp( unsigned long l )
 {
     if( l == 0 ) return 1;
@@ -199,4 +191,4 @@ int main( int argc, char * argv[] )
     unsigned int n{ static_cast< unsigned int >( std::stoul( argv[1] ))};
     boost::multiprecision::mpz_int factorial_gmp( static_cast< unsigned long >(n) );
 }
-/**/
+

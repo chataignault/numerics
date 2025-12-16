@@ -1,10 +1,3 @@
-/*
- * Cursus CentraleSupélec - Dominante Mathématiques et Data Sciences
- * 3MD1080 - C++ - TP n°2
- *
- * Expression.hpp
- */
-
 #ifndef EXPRESSION_HPP_INCLUDED
 #define EXPRESSION_HPP_INCLUDED
 
@@ -142,7 +135,7 @@ public:
 };
 
 
-/*********************************************************************SMART POINTERS**************************************************************/
+/*********************************SMART POINTERS************************************/
 
 template<typename Base, typename T>
 inline bool instanceof(const T el) {

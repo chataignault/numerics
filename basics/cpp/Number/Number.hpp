@@ -1,10 +1,3 @@
-/*
- * Cursus CentraleSupélec - Dominante Mathématiques et Data Sciences
- * 3MD1080 - C++ - TP n°1
- *
- * Number.hpp
- */
-
 #ifndef NUMBER_HPP_INCLUDED
 #define NUMBER_HPP_INCLUDED
 

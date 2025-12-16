@@ -1,11 +1,3 @@
-/*
- * Cursus CentraleSupélec - Dominante Mathématiques et Data Sciences
- * 3MD1080 - C++ - TP n°1
- *
- * TestNumber.cpp
- * c++ -std=c++ -o TestNumber Number.cpp TestNumber.cpp
- */
-
 #include <exception>
 #include <sstream>
 #include <utility>

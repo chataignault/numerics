@@ -1,11 +1,3 @@
-/*
- * Cursus CentraleSupélec - Dominante Mathématiques et Data Sciences
- * 3MD1080 - C++ - TP n°3
- *
- * compute_pi_montecarlo.cpp
- * c++ -o compute_pi_montecarlo compute_pi_montecarlo.cpp -lpthread
- */
-
 #define _USE_MATH_DEFINES
 
 #include <chrono>

@@ -3,19 +3,11 @@
 #include <functional>
 #include <cmath>
 
-
-/* 
-SECTION AIMED AT TESTING NOTIONS FROM THE LECTURE
-AND STORE USEFUL CODE SNIPPETS
-*/
-
-
 // define constant 
 int const zero{0};
 int num{1};
 int * const ptr_constant{ &num };
 int const * ptr_sur_constant{ &num };
-
 
 // swith control structure
 void switch_test() {
@@ -42,7 +34,6 @@ auto lambda = [] (int n ) -> bool {return n % 2 ==0;};
 // another way
 std::function< int (bool) > lambda2{ lambda };
 
-
 // lambda function passed as argument 
 void for_each_test() {
     std::cout << std::endl << "***For each and lambda function test***" << std::endl;
@@ -53,7 +44,6 @@ void for_each_test() {
     );
     std::cout << "Now tab looks like that" << tab;
 }
-
 
 // capture de contexte 
 void capture_context_test() {
@@ -66,7 +56,6 @@ void capture_context_test() {
     j++;
     std::cout << "Now increasing j: i=" << i << ", j=" << j << ", sum=" << sum() << std::endl;
 }
-
 
 // agregate
 struct Complex {
@@ -83,7 +72,6 @@ void aggregate_test() {
     c = c_nul;
 }
 
-
 // enum
 void enum_test() {
     std::cout << "\n ***Color test***\n";
@@ -96,7 +84,6 @@ void enum_test() {
         case Color::blue : std::cout << "The color is blue\n"; break;
     }
 }
-
 
 // pointeurs
 void pointeur_test() {
@@ -112,7 +99,6 @@ void pointeur_test() {
     // both operators are complementary
 }
 
-
 // faire un effet de bord en passant un pointeur comme argument
 int * pointeur_passing_test(int * p) {
     std::cout << std::endl << "***Pointeur passing test***" << std::endl;
@@ -120,7 +106,6 @@ int * pointeur_passing_test(int * p) {
     p[0] = 1; p[1] = 2;
     return p;
 }
-
 
 // allocation statique / automatique
 int x{1}; // allocation statique,  disparait a la fin de main()
@@ -133,7 +118,6 @@ void f() {
     delete p;
 }
 
-
 // allocation dynamique de tab
 int taille{5};
 auto tab( new int[taille] );
@@ -141,13 +125,11 @@ int * p1{ &tab[0] };
 int * p2{ &tab[5] };
 ptrdiff_t i{ p2 - p1 };
 
-
 // retour de valeur
 int & getVal() {
     static int val{ 5 };
     return val;
 }
-
 
 // class 
 struct Complex_m {

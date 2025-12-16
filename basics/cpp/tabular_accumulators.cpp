@@ -1,21 +1,5 @@
-/*
- * Cursus CentraleSupélec - Dominante Mathématiques et Data Sciences - Campus de Paris-Saclay
- * 3MD1080 – C++ - TD n°3
- * https://wdi.centralesupelec.fr/3MD1080/TD3
- *
- *
- * c++ -std=c++20 -o td3 td3.cpp
- * ./td3
- */
-
-
-
 #include "td3.h"
 
-
-
-
-// Définir dans main() une variable du bon type pour mémoriser les données lues
 int main( int argc, char * argv[] )
 {
      //Measure m("2019;2;9;19;12.2");
@@ -62,6 +46,5 @@ int main( int argc, char * argv[] )
             << acc::min(value) << " max: " << acc::max(value)
             << " moy: " << acc::mean(value) << "\n";
     }
-
 
 }
