@@ -17,21 +17,21 @@ for _ in range(n):
             if q == 1:
                 print("Alice")
                 break
-            bob.pop()
+            heapq.heappop(bob)
             q -= 1
         else:
-            y = bob.pop()
+            y = heapq.heappop(bob)
             heapq.heappush(bob, y - x)
         
-        # other turn 
+        # other turn
         x = bob[0]
         if x <= alice[0]:
             if p == 1:
                 print("Bob")
                 break
-            alice.pop()
+            heapq.heappop(alice)
             p -= 1
         else:
-            y = alice.pop()
+            y = heapq.heappop(alice)
             heapq.heappush(alice, y - x)
 
