@@ -1,7 +1,6 @@
 use std::collections::HashMap;
 
 fn main() {
-    
     // parse street information
     let mut input = String::new();
     std::io::stdin().read_line(&mut input).unwrap();
@@ -22,7 +21,7 @@ fn main() {
         //println!("{}", street_name);
         names.push(street_name.clone())
     }
-    
+
     let mut counts: Vec<i32> = vec![];
 
     // count letters
@@ -53,12 +52,21 @@ fn main() {
         if k > 0 {
             k = m - k
         }
+        if k < 0 {
+            k = -1
+        }
         counts.push(k);
         for (key, value) in name_letter_count.iter() {
             *letter_count.get_mut(&key).unwrap() += value;
         }
     }
 
-    println!("{}", counts.iter().map(|x| x.to_string()).collect::<Vec<_>>().join(" "));
+    println!(
+        "{}",
+        counts
+            .iter()
+            .map(|x| x.to_string())
+            .collect::<Vec<_>>()
+            .join(" ")
+    );
 }
-
