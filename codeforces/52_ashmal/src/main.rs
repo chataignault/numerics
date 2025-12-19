@@ -15,11 +15,7 @@ fn main() {
         let s = words.iter().fold(String::new(), |acc, word| {
             let prepend = format!("{}{}", word, acc);
             let append = format!("{}{}", acc, word);
-            if prepend < append {
-                prepend
-            } else {
-                append
-            }
+            if prepend < append { prepend } else { append }
         });
         println!("{}", s);
     }

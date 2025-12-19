@@ -19,7 +19,7 @@ fn main() {
             println!("{}", a);
         } else {
             let g: u32 = a.gcd(b);
-            println!("{}", ((m-1) / g) * g);
+            println!("{}", ((m - 1) / g) * g);
         }
     }
 }
