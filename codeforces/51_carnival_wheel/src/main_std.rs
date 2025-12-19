@@ -18,15 +18,13 @@ fn main() {
         let mut args = l.split_whitespace();
         let m: u32 = args.next().unwrap().parse().unwrap();
         let a: u32 = args.next().unwrap().parse().unwrap();
-        let mut b: u32 = args.next().unwrap().parse().unwrap();
-        b = b % m;
-        if a == 0 && b == 0 {
-            println!("0");
-        } else if b == 0 {
+        let b: u32 = args.next().unwrap().parse().unwrap();
+
+        if b == 0 {
             println!("{}", a);
         } else {
-            let g: u32 = gcd(a, b);
-            println!("{}", ((m-1) / g) * g);
+            let g: u32 = gcd(b, m);
+            println!("{}", a + ((m - 1 - a) / g) * g);
         }
     }
 }
