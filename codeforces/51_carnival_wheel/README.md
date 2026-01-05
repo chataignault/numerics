@@ -35,6 +35,6 @@ or :
 Eventually :
 
 ```math
-\max \left\{k | k \in a + (b\wedge m) \mathbb{Z} \right\} = \begin{cases} a \ \ \ \text{if } \ \ b = 0 \\ \lfloor \frac{m-1-a}{b\wedge m} \rfloor (b\wedge m) \end{cases}
+\max \left\{k | k \in a + (b\wedge m) \mathbb{Z} / m\mathbb{Z} \right\} = \begin{cases} a \ \ \ \text{if } \ \ b = 0 \\ a + \lfloor \frac{m-1-a}{b\wedge m} \rfloor (b\wedge m) \end{cases}
 ```
 
