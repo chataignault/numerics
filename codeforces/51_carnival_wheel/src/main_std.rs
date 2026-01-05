@@ -12,7 +12,7 @@ fn main() {
     std::io::stdin().read_line(&mut input).unwrap();
     let n: i32 = input.split_whitespace().next().unwrap().parse().unwrap();
 
-    for i in 0..n {
+    for _ in 0..n {
         let mut l = String::new();
         std::io::stdin().read_line(&mut l).unwrap();
         let mut args = l.split_whitespace();
