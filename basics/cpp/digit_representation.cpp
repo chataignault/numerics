@@ -2,7 +2,6 @@
 #include <iomanip>
 #include <cctype>
 #include <limits>
-//#include <boost/multiprecision/gmp.hpp> 
 #include <gmpxx.h>
 
 using DigitType = unsigned long;
@@ -17,7 +16,6 @@ using Number = Digit *; // type defining a pointer to a Digit
 
 const DigitType number_base = 100000000000;
 
-
 void print_number( Number n )
 {
     if( n == nullptr ) return;
@@ -30,12 +28,9 @@ void test31() {
     Digit d2{ 2, &d1 };
     Digit d3{ 3, &d2 };
     Number number{&d3};
-
     print_number(number);
     std::cout << std::endl;
-
 }
-
 
 void free_number(Number n) {
     if( n == nullptr ) return;
@@ -43,20 +38,15 @@ void free_number(Number n) {
     delete n;
 }
 
-
 void test32() {
     Number d1{new Digit{1, nullptr }};
     Number d2{new Digit{ 2, d1 }};
     Number d3{new Digit{ 3, d2 }};
-
     print_number(d3);
     std::cout << std::endl;
-
     free_number(d3);
-
     std::cout << "the variable has been cleaned" << std::endl;
 }
-
 
 Number build_number(unsigned long l) {
     Number n{new Digit{ static_cast<DigitType>(l % number_base), nullptr }};
@@ -92,16 +82,13 @@ Number read_number() {
     return p;
 }
 
-
 void test34() {
     Number n = read_number();
     std::cout << "The number is : \n >>> ";
     print_number(n);
     free_number(n);
 } 
-*/
 
-/*
 void multiply_number( Number n, unsigned int i, unsigned int carry = 0 ) {
     // Prints  multiplication of n by
     if (n == nullptr) return;
@@ -121,30 +108,11 @@ void multiply_number( Number n, unsigned int i, unsigned int carry = 0 )
     if( n->next_ != nullptr ) multiply_number( n->next_, i, mul / number_base );
     else if( mul >= number_base ) n->next_ = build_number( mul / number_base );
 }
-/*
-void test41() {
-    std::cout << "Enter number :\n";
-    Number n{read_number()};
-    unsigned int l;
-    std::cout << "Enter int :\n";
-    std::cin >> l;
-    multiply_number(n, l);
-    std::cout << "n * i = ";
-    print_number( n );
-    std::cout << "\n";
-    free_number( n );
-}
-*/
 
 Number factorial(unsigned int l) {
     Number n{new Digit{1, nullptr }};
     if (l <= 1) return n;
     for(int i{1}; i <= l; i++) { multiply_number(n, i); };
-    /* 
-    if( l <= 1 ) return build_number( 1 );
-    Number n{ build_number( l )};
-    while( --l > 0 ) multiply_number( n, l );
-    */
     return n;
 }
 
@@ -174,7 +142,6 @@ void test_52( unsigned int i ) {
     std::cout << "i! = ";
     print_number( n );
     free_number( n );
-
 }
 
 boost::multiprecision::mpz_int factorial_gmp( unsigned long l )
@@ -191,4 +158,3 @@ int main( int argc, char * argv[] )
     unsigned int n{ static_cast< unsigned int >( std::stoul( argv[1] ))};
     boost::multiprecision::mpz_int factorial_gmp( static_cast< unsigned long >(n) );
 }
-

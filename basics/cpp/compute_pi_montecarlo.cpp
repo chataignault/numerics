@@ -8,13 +8,10 @@
 #include <random>
 #include <string>
 #include <thread>
-
 #include <cctype>
 #include <cmath>
 #include <cstdlib>
-
 #include <numeric>
-
 
 using FloatKind = float;
 
@@ -59,7 +56,6 @@ void test12( unsigned long nb_points )
     FloatKind pi_approx = compute_pi(nb_points);
     auto end = std::chrono::steady_clock::now();
     std::chrono::duration< double > elapsed_seconds = end - start;
-
     std::cout << "The computation time was : " << elapsed_seconds.count() << std::endl
               << "Corresponding to an absolute error of : " << std::abs(M_PI - pi_approx) << std::endl;
 }
@@ -102,7 +98,6 @@ FloatKind compute_pi( unsigned long nb_points, unsigned int nb_threads )
 
     FloatKind sum = std::accumulate(pi_approximations.begin(), pi_approximations.end(), 0.);
     FloatKind mean = sum/pi_approximations.size();
-
     return mean;
 }
 
@@ -113,7 +108,6 @@ void test2( unsigned long nb_points, unsigned long nb_threads )
     FloatKind pi_approx = compute_pi(nb_points, nb_threads);
     auto end = std::chrono::steady_clock::now();
     std::chrono::duration< double > elapsed_seconds = end - start;
-
     std::cout << "The computation time was : " << elapsed_seconds.count() << std::endl
               << "Corresponding to an absolute error of : " << std::abs(M_PI - pi_approx) << std::endl;
 }
@@ -123,7 +117,6 @@ int main( int argc, char * argv[] )
     unsigned long nb_points = std::stoul(argv[1]);
     test11(nb_points);
     test12(nb_points);
-
     /*1.3*/
     /*
     compute_pi_montecarlo.exe 100000000
@@ -132,15 +125,12 @@ int main( int argc, char * argv[] )
     with 500000000, it then takes 40 seconds to run with the first optimisation
     it takes 45 seconds with -O2 and 54 seconds with -O3 
     */
-
    test14(nb_points); // with 10 000 000 points, the difference is in 10e-4
-
     /*1.5*/
     /*
     Using double instead of floats leads to an slight increase in computation time, the precision is unchanged
     Using long double has the same effect.
     */
-
     unsigned long nb_threads = std::stoul(argv[2]); 
     test2(nb_points, nb_threads);
 }

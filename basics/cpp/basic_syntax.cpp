@@ -155,7 +155,6 @@ double Complex_m::module() const { // modification des attributs interdite avec 
 }
 */
 
-
 int main() {
     switch_test();
     for_each_test();
