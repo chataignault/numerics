@@ -130,8 +130,55 @@ double dichotomy_root_finding( std::function<double(double)> func, double begin,
     return mid;
 }
 
+bool set_mflag(bool mflag, double s, double a, double b, double c, double d, double precision) {
+	if (b < s or s < (3 * a + b) / 4.) mflag = true;
+	if (mflag and std::abs(s - b) > std::abs(b - c) / 2.) mflag = true;
+	if (not mflag and std::abs(s-b) > std::abs(c-d) / 2.) mflag = true;
+	if (mflag and std::abs(b - c) < precision) mflag = true;
+	if (not mflag and std::abs(c - d) < precision) mflag = true
+	return mflag
+}
+
 double brent_root_finding( std::function< double(double) > func, double begin, double end, double precision ) {
-    return 0;
+	double f_a{func(begin)};
+	double f_b{func(end)};
+	if (f_a * f_b > 0) return 0;
+	if (std::abs(f_a) < std::abs(f_b)) {
+		c = end;
+		end = begin;
+		begin = c;
+	}
+	c = begin;
+	bool mflag;
+	while std::abs(end-begin) > precision or std::abs(func(c)) > precision {
+		f_c = func(c);
+		if f_a != f_c and f_c != f_b {
+			s = a * f_b * f_c / (f_a - f_b) / (f_a - f_c)
+				+ b * f_a * f_c / (f_b - f_a) / (f_b - f_c)
+				+ c * f_a * f_b / (f_c - f_a) / (f_c - f_b);
+		}
+		else {
+			s = end - f_b * (end-begin) / (f_b - f_a);
+		}
+		if (set_mflag(mflag, s, begin, end, c, d, precision) {
+			mflag = true;
+			s = (begin + end) / 2.;
+		}
+		else mflag = false;
+		f_s = func s;
+		d = c;
+		c = end;
+		if (f_a * f_s < 0) end = s;
+		else begin = s;
+		f_a = func(begin);
+		f_b = func(end);
+		if (std::abs(f_a) < std::abs(f_b)) {
+			r = end;
+			end = begin;
+			begin = r;
+		}
+	}
+	return s
 }
 
 void test32() {
