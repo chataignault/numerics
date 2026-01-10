@@ -75,7 +75,7 @@ let ppe t =
 	
 let permute1 t a =
 	let n = Array.length t in
-	let b = Array.make n t.(0) in (* en mettant t.(0) on fait du polyorphisme*)
+	let b = Array.make n t.(0) in (* en mettant t.(0) on fait du polymorphisme*)
 	for k = 0 to n - 1 do
 		b.( (k + a) mod n) <- t.(k)
 	done,
@@ -84,9 +84,7 @@ let permute1 t a =
 		done;;
 
 
-
 (*Programmation fonctionnelle et imperative*)
-
 
 let rec somme n = if n = 0 then 0 else somme (n - 1) + n * n ;;
 	
@@ -162,11 +160,6 @@ let rec fibo n = match n with
 	| 1 -> 1
 	| _ -> fibo (n - 1) + fibo (n - 2);;
 
-(*let rec fibo2 n = function  
-	| 0 -> 1
-	| 1 -> 1
-	| _ -> fibo2 (n - 1), (fibo2 (n - 1) + fibo2 (n - 2)) ;;*)
-
 (*Implementation des polynomes par des tableaux*)
 
 let polynome nul p = 
@@ -177,76 +170,3 @@ let polynome nul p =
 		done;
 	!bol;;
 
-
-(*let a = ref 0 in
-for k = 1 to 30 
-  do
-    a := !a + k*k*k  
-  done;
-!a;;
-
-(* commentaires *)
-
-let suite_u n =
-  let a = ref 3. in 
-  for k = 1 to n
-    do
-    a := ( !a -. 1. ) ** 2.
-    done;
-  !a;;
-
-let factorielle n = 
-  let a = ref 1 in
-  for k = 1 to n
-    do
-    a := !a * k
-    done;
-  !a;;
-
-let moyenne a b c = 
-  (a +. b +. c) /. 3. ;;
-
-let divise a b = b mod a = 0 ;;
-
-let premier n = 
-  let m = ref 2 in
-  while n mod !m != 0 && !m * !m < n
-    do
-    m := !m + 1
-    done;
-  !m * !m > n;;
-
-let permute2 t k =
-  let n = Array.length t in
-  let t1 = Array.make n t.(0) in
-  for i = 0 to n-1 
-    do
-      t1.((i+k)mod n) <- t.(i)
-    done;
-  t1;;
-  
- let permute1 t k =
-  let n = Array.length t in
-  let t1 = Array.make n t.(0) in
-  for i = 0 to n-1 
-    do
-      t1.((i+k)mod n) <- t.(i)
-    done;
-  for i = 0 to n-1 
-    do
-      t.(i) <- t1.(i)
-    done;; 
-
-let puissance a n =
-  let x = ref 1. in
-  for k = 1 to n 
-  do
-    x := !x *. a
-  done;
-  !x;;
-
-let rec puissance a n =
-  if n = 0 then 1.
-  else a *. puissance a (n-1);;
-
-*)

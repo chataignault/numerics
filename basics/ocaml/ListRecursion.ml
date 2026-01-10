@@ -70,14 +70,6 @@ let rec degre p =
       let d = degre t in
       if d < n && a != 0. then n else d
 
-let rec degre2 = function
-  | [] -> 0
-  | (a, n) :: t ->
-      let d = degre t in
-      if n > d then n else d
-
-(*dans le cas ou aucun coefficient n'est nul*)
-
 (*puissances croissantes*)
 let rec degre p =
   match p with [] -> 0 | [ (a, n) ] -> n | (a, n) :: t -> degre t
@@ -119,7 +111,7 @@ let rec degreH = function [] -> 0 | a :: p -> 1 + degreH p
 let rec coefficientH n p =
   match p with
   | [] -> failwith "coefficientH"
-  | a :: t -> if n = 1 then a else coefficientH (n - 1) t
+  | a :: t -> if n = 0 then a else coefficientH (n - 1) t
 
 let rec sommeH p q =
   match (p, q) with
@@ -127,7 +119,14 @@ let rec sommeH p q =
   | _, [] -> p
   | a :: t, b :: l -> (a +. b) :: sommeH t l
 
-(*let rec produitH p q = match p,q with
-	|[],_ -> []
-	|_,[] -> []
-	|a::t,b::l -> (a *. b)::produit *)
+(* COMPLETE
+let rec produit_elemH c p = 
+  match (c, p) with
+  | _, [] -> []
+  | (a, n), (b, m)::t -> (a *. b
+
+let rec produitH p q = match p,q with
+  | [], _ -> []
+  | _, [] -> []
+  | a::t,b::l -> (a *. b)::produit
+*)

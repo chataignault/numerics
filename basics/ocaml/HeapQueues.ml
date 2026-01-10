@@ -10,8 +10,6 @@ let depile p =
       p.liste <- t;
       h
 
-(*3.2*)
-
 type eap_elt =
   | Nb of float
   | Op of (float -> float -> float)
@@ -44,7 +42,6 @@ let eval_poly t =
   done;
   depile p
 
-(*3.3*)
 let rec vider l1 l2 = match l1 with [] -> l2 | h :: t -> vider t (h :: l2)
 let inverse l = vider l []
 
@@ -69,7 +66,6 @@ let tete f =
     end
   | h :: t -> h
 
-(*3.4*)
 type 'a fileimp = { mutable avant : 'a list; mutable arriere : 'a list }
 
 let filevideimp () = { avant = []; arriere = [] }
@@ -98,8 +94,6 @@ let teteimp f =
       match inverse f.avant with [] -> failwith "file vide" | h :: t -> h
     end
   | h :: t -> h
-
-(*3.5*)
 
 type 'a pile = { mutable liste : 'a list }
 
@@ -153,38 +147,3 @@ let hamming n =
   done;
   !ham
 
-(*(*EXEMPLES DE COURS*)
-
-(*Type somme*)	
-type liste_entiers = Listevide | Liste of int*liste_entiers;;
-let ajoute a l = Liste (a,l);;
-let rec longueur = function
-	|Listevide -> 0
-	|Liste (a*t) -> 1 + longueur t;;
-(*Avec du polymorphisme*)
-type 'a liste = Listevide | Liste of 'a*('a liste);;
-
-(*Type produit*)
-type complexe = {re : float ; im : float}
-let i = {re = 0. ; im = 1.};;
-let somme c1 c2 = {re = c1.re +. c2.re ; c1.im +. c2.im};;
-type personne = {nom : string ; mutable age : int};;
-let a = {nom = toto ; age = 6}
-a.age <- a.age + 1;;
-
-(*Files, structure imperative*)
-let lmax = 100;;
-type 'a file = {tab: 'a array ; mutable tete: int ; mutable longueur : int};;
-let filevide a = {tab = Array.make lmax a ; tete = 0 ; longueur = 0};;
-let enfile e f = if f.longueur = lmax
-		then failwith "liste saturee"
-		else begin (f.tab).((f.tete + f.longueur) mod lmax ) <- e;
-			f.longueur <- (f.longueur + 1) end;;
-let defile f = if f.longueur = 0
-		then failwith "file vide"
-		else begin let a = (f.tab).(f.tete) in 
-			f.tete <- (f.tete + 1) mod lmax;
-			f.longueur <- f.longueur - 1;
-			a
-	end;;
-*)
