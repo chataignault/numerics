@@ -1,7 +1,7 @@
 #include <iostream>
+#include <memory>
 #include <string>
 #include <utility>
-#include <memory>
 
 #include "Expression.hpp"
 
