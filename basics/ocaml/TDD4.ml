@@ -1,74 +1,65 @@
-let couples_en_liste couples n = 
+let couples_en_liste couples n =
+  let vect = Array.make n [] in
+  let rec aux t =
+    match t with
+    | [] -> vect
+    | (a, b) :: q ->
+        vect.(a) <- b :: vect.(a);
+        aux q
+  in
 
-	let vect = Array.make n [] in
-	let rec aux t = match t with
-		| [] -> vect
-		| (a,b)::q -> vect.(a) <- b::vect.(a); aux q;
-		in
-		
-	aux couples;;
-	
-	
-	
-let vect_adj n lis = 
+  aux couples
 
-	let adj = Array.make n [] in
-	let l = ref lis in
-	 
-	while !l <> [] do
-		let (i,j) = List.hd(!l) in
-		adj.(i) <- j::adj.(i);
-		l := List.tl(!l);
-	done;
-	
-	adj;;
-	
+let vect_adj n lis =
+  let adj = Array.make n [] in
+  let l = ref lis in
 
-	
-let vectcoadj vadj = 
+  while !l <> [] do
+    let i, j = List.hd !l in
+    adj.(i) <- j :: adj.(i);
+    l := List.tl !l
+  done;
 
-	let n = Array.length vadj in
-	let coadj = Array.make n [] in
-	
-	for i = 0 to n - 1 do
-		let l = ref vadj.(i) in
-		while !l <> [] do
-			let j = List.hd(!l) in
-			coadj.(j)<- i::coadj.(j);
-			l := List.tl(!l);
-		done;
-	done;
-	
-	coadj;;
-	
-	
+  adj
 
+let vectcoadj vadj =
+  let n = Array.length vadj in
+  let coadj = Array.make n [] in
 
-let rec insere i lis  = match lis with
-		| [] -> [i]
-		| a::q when i < a -> i::lis
-		| a::q when (i = a) -> lis
-		| a::q -> a::(insere i q);;
-		
-		
-		
-let desoriente vadj = 
+  for i = 0 to n - 1 do
+    let l = ref vadj.(i) in
+    while !l <> [] do
+      let j = List.hd !l in
+      coadj.(j) <- i :: coadj.(j);
+      l := List.tl !l
+    done
+  done;
 
-	let n = Array.length vadj in
-	let res = Array.make n [] in
-	
-	for i = 0 to n - 1 do
-		let l = ref vadj.(i) in
-		while !l <> [] do
-			let j = List.hd(!l) in
-			insere i res.(j);
-			insere j res.(i);
-			l := List.tl(!l);
-		done;
-	done;
-	
-	vadj;;
-	
+  coadj
+
+let rec insere i lis =
+  match lis with
+  | [] -> [ i ]
+  | a :: q when i < a -> i :: lis
+  | a :: q when i = a -> lis
+  | a :: q -> a :: insere i q
+
+let desoriente vadj =
+  let n = Array.length vadj in
+  let res = Array.make n [] in
+
+  for i = 0 to n - 1 do
+    let l = ref vadj.(i) in
+    while !l <> [] do
+      let j = List.hd !l in
+      insere i res.(j);
+      insere j res.(i);
+      l := List.tl !l
+    done
+  done;
+
+  vadj
+
 (*
 let fonction5 g l = 
 
@@ -198,52 +189,45 @@ let chemin_min poids_bis i j =
 	
 	*)
 
-let floyd g = 
+let floyd g =
+  let n = Array.length g in
+  let acc = Array.make_matrix n n false in
 
-	let n = Array.length g in
-	let acc = Array.make_matrix n n false in
-	
-	for i = 0 to n - 1 do
-		for j = 0 to n-1 do
-			if g.(i).(j) then acc.(i).(j) <- true;
-		done;
-		acc.(i).(i) <- true;
-	done;
-		
-	for k = 0 to n - 1 do 
-		for i = 0 to n-1 do
-			for j = 0 to n-1 do
-				acc.(i).(j) <- acc.(i).(j) || (acc.(i).(k) && acc.(k).(j));
-			done;
-		done;
-	done;
-	
-	acc;;
-	
-	
-let floyd_poids g = 
+  for i = 0 to n - 1 do
+    for j = 0 to n - 1 do
+      if g.(i).(j) then acc.(i).(j) <- true
+    done;
+    acc.(i).(i) <- true
+  done;
 
-	let n = Array.length g in
-	let acc = Array.make_matrix n n infinity in
-	
-	for i = 0 to n - 1 do
-		for j = 0 to n-1 do
-			if (g.(i).(j) <> infinity)then acc.(i).(j) <- g.(i).(j) ;
-		done;
-		acc.(i).(i) <- 0.;
-	done;
-		
-	for k = 0 to n - 1 do 
-		for i = 0 to n-1 do
-			for j = 0 to n-1 do
-				if acc.(i).(j) > (acc.(i).(k) +. acc.(k).(j)) then acc.(i).(j) <-  (acc.(i).(k) +. acc.(k).(j));
-			done;
-		done;
-	done;
-	
-	acc;;
+  for k = 0 to n - 1 do
+    for i = 0 to n - 1 do
+      for j = 0 to n - 1 do
+        acc.(i).(j) <- acc.(i).(j) || (acc.(i).(k) && acc.(k).(j))
+      done
+    done
+  done;
 
-	
-	
-	
-	
+  acc
+
+let floyd_poids g =
+  let n = Array.length g in
+  let acc = Array.make_matrix n n infinity in
+
+  for i = 0 to n - 1 do
+    for j = 0 to n - 1 do
+      if g.(i).(j) <> infinity then acc.(i).(j) <- g.(i).(j)
+    done;
+    acc.(i).(i) <- 0.
+  done;
+
+  for k = 0 to n - 1 do
+    for i = 0 to n - 1 do
+      for j = 0 to n - 1 do
+        if acc.(i).(j) > acc.(i).(k) +. acc.(k).(j) then
+          acc.(i).(j) <- acc.(i).(k) +. acc.(k).(j)
+      done
+    done
+  done;
+
+  acc
