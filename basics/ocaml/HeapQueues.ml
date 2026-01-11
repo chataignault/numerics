@@ -146,4 +146,3 @@ let hamming n =
     empile (5 * x) h5
   done;
   !ham
-

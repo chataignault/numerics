@@ -30,7 +30,6 @@ let ajoute a l = Liste (a, l)
 let rec longueur = function Liste_Vide -> 0 | Liste (a, l) -> 1 + longueur l
 
 type 'a liste = Liste_Vide | Liste of 'a * 'a liste
-
 type complexe = { re : float; im : float }
 
 let i = { re = 0.; im = 1. }
