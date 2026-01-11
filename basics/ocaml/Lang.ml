@@ -242,20 +242,6 @@ let accessible auto_gen =
 
   acc
 
-(*let calcule_aut_local lang_loc = 
-	let init =  ref lang_loc.i in 
-	let l = ref [] in 
-	
-	while !init <> [] do
-		let x = List.hd(!init) in 
-		init := List.tl !init;
-		l := x::!l;
-	done;
-	if lang_loc.vide then 
-	{ initial = 0 ; terminaux = 0::lang_loc.s ; delta = vect_of_list fusionne !l lang_loc.f }
-	else 
-	{ initial = 0 ; terminaux = lang_loc.s ; delta = vect_of_list fusionne !l lang_loc.f }*)
-
 type expr =
   | Vide
   | Eps
